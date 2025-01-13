@@ -11,8 +11,8 @@ plugins {
     id("org.openapi.generator") version "6.6.0"
 }
 
-val generatedRoot = "$buildDir/generated/openapi"
-val generatedSource = "$generatedRoot/src/main/java"
+val generatedRoot = layout.buildDirectory.dir("generated/openapi")
+val generatedSource = generatedRoot.get().dir("src/main/java")
 
 sourceSets {
     getByName("main") {
@@ -25,7 +25,7 @@ sourceSets {
 idea {
     module {
         sourceDirs.add(file("src/main/json"))
-        generatedSourceDirs.add(file(generatedSource))
+        generatedSourceDirs.add(generatedSource.asFile)
     }
 }
 
@@ -50,8 +50,8 @@ dependencies {
 val openApiGenerateObjectCreated =
     tasks.register<org.openapitools.generator.gradle.plugin.tasks.GenerateTask>("openApiGenerateObjectCreated") {
         generatorName.set("java")
-        inputSpec.set("$projectDir/src/main/json/ObjectCreated.json")
-        outputDir.set(generatedRoot)
+        inputSpec.set(layout.projectDirectory.file("src/main/json/ObjectCreated.json").toString())
+        outputDir.set(generatedRoot.get().toString())
         modelPackage.set("clusterless.aws.lambda.transform.json.object")
 
         configOptions.put("library", "native")
@@ -73,8 +73,8 @@ val openApiGenerateObjectCreated =
 val openApiGenerateScheduledEvent =
     tasks.register<org.openapitools.generator.gradle.plugin.tasks.GenerateTask>("openApiGenerateScheduledEvent") {
         generatorName.set("java")
-        inputSpec.set("$projectDir/src/main/json/ScheduledJson.json")
-        outputDir.set(generatedRoot)
+        inputSpec.set(layout.projectDirectory.file("src/main/json/ScheduledJson.json").toString())
+        outputDir.set(generatedRoot.get().toString())
         modelPackage.set("clusterless.aws.lambda.transform.json.event")
 
         configOptions.put("library", "native")
@@ -105,8 +105,12 @@ tasks.register<Zip>("packageAll") {
 
     into("lib") {
         from(configurations.runtimeClasspath)
-        dirMode = 755
-        fileMode = 755
+        dirPermissions {
+            unix("rwxr-xr-x")
+        }
+        filePermissions {
+            unix("rwxr-xr-x")
+        }
         isReproducibleFileOrder = true
         isPreserveFileTimestamps = false
     }

@@ -34,7 +34,7 @@ tasks.getAt("installDist").dependsOn(awsKernelInstall)
 
 tasks.named<ProcessResources>("processResources") {
     doFirst {
-        file("${buildDir}/resources/main/version.properties")
+        file(layout.buildDirectory.file("resources/main/version.properties"))
             .writeText("clusterless.release.full=${version}")
     }
 }
@@ -125,7 +125,7 @@ tasks.register<Exec>("generateComponentModels") {
         "component",
         "--model-all",
         "--output-path",
-        "${buildDir}/generated-docs/modules/components"
+        layout.buildDirectory.dir("generated-docs/modules/components").toString()
     )
 }
 
@@ -140,7 +140,7 @@ tasks.register<Exec>("generateComponentModelsRequired") {
         "--model-all",
         "--required",
         "--output-path",
-        "${buildDir}/generated-docs/modules/components"
+        layout.buildDirectory.dir("generated-docs/modules/components").toString()
     )
 }
 
@@ -154,7 +154,7 @@ tasks.register<Exec>("generateModelModels") {
         "model",
         "--model-all",
         "--output-path",
-        "${buildDir}/generated-docs/modules/models"
+        layout.buildDirectory.dir("generated-docs/modules/models").toString()
     )
 }
 
@@ -169,7 +169,7 @@ tasks.register<Exec>("generateModelModelsRequired") {
         "--model-all",
         "--required",
         "--output-path",
-        "${buildDir}/generated-docs/modules/models"
+        layout.buildDirectory.dir("generated-docs/modules/models").toString()
     )
 }
 
@@ -183,7 +183,7 @@ tasks.register<Exec>("generateComponentDocs") {
         "component",
         "--describe-all",
         "--output-path",
-        "${buildDir}/generated-docs/modules/components"
+        layout.buildDirectory.dir("generated-docs/modules/components").toString()
     )
 }
 
@@ -197,7 +197,7 @@ tasks.register<Exec>("generateResourceIndex") {
         "resource",
         "--list",
         "--output-path",
-        "${buildDir}/generated-docs/modules/components/",
+        layout.buildDirectory.dir("generated-docs/modules/components/").toString(),
         "--append=false"
     )
 }
@@ -212,7 +212,7 @@ tasks.register<Exec>("generateArcIndex") {
         "arc",
         "--list",
         "--output-path",
-        "${buildDir}/generated-docs/modules/components/",
+        layout.buildDirectory.dir("generated-docs/modules/components/").toString(),
         "--append=true"
     )
     mustRunAfter("generateBoundariesIndex")
@@ -228,7 +228,7 @@ tasks.register<Exec>("generateBarriersIndex") {
         "barrier",
         "--list",
         "--output-path",
-        "${buildDir}/generated-docs/modules/components/",
+        layout.buildDirectory.dir("generated-docs/modules/components/").toString(),
         "--append=true"
     )
     mustRunAfter("generateArcIndex")
@@ -244,7 +244,7 @@ tasks.register<Exec>("generateBoundariesIndex") {
         "boundary",
         "--list",
         "--output-path",
-        "${buildDir}/generated-docs/modules/components/",
+        layout.buildDirectory.dir("generated-docs/modules/components/").toString(),
         "--append=true"
     )
     mustRunAfter("generateResourceIndex")
@@ -260,7 +260,7 @@ tasks.register<Exec>("generateActivitiesIndex") {
         "activity",
         "--list",
         "--output-path",
-        "${buildDir}/generated-docs/modules/components/",
+        layout.buildDirectory.dir("generated-docs/modules/components/").toString(),
         "--append=true"
     )
     mustRunAfter("generateBoundariesIndex")
@@ -276,7 +276,7 @@ tasks.register<Exec>("generateComponentPartial") {
         "component",
         "--list",
         "--output-path",
-        "${buildDir}/generated-docs/modules/components/partials",
+        layout.buildDirectory.dir("generated-docs/modules/components/partials").toString(),
         "--name",
         "components.adoc",
         "--template",
@@ -294,7 +294,7 @@ tasks.register<Exec>("generateModelDocs") {
         "model",
         "--describe-all",
         "--output-path",
-        "${buildDir}/generated-docs/modules/models"
+        layout.buildDirectory.dir("generated-docs/modules/models").toString()
     )
 }
 
@@ -308,7 +308,7 @@ tasks.register<Exec>("generateModelIndex") {
         "model",
         "--list",
         "--output-path",
-        "${buildDir}/generated-docs/modules/models/"
+        layout.buildDirectory.dir("generated-docs/modules/models/").toString()
     )
 }
 
@@ -322,7 +322,7 @@ tasks.register<Exec>("generateModelPartial") {
         "model",
         "--list",
         "--output-path",
-        "${buildDir}/generated-docs/modules/models/partials",
+        layout.buildDirectory.dir("generated-docs/modules/models/partials").toString(),
         "--name",
         "models.adoc",
         "--template",
@@ -356,7 +356,7 @@ tasks.register<Copy>("generateDocs") {
             it.replace(".adoc.template", ".adoc")
         }
     }
-    from("${buildDir}/generated-docs/") {
+    from(layout.buildDirectory.dir("generated-docs/")) {
         filter {
             it.lineSequence().filterNot { line ->
                 line.startsWith("// ") ||
@@ -364,7 +364,7 @@ tasks.register<Copy>("generateDocs") {
             }.joinToString("\n")
         }
     }
-    into("${buildDir}/docs/")
+    into(layout.buildDirectory.dir("docs/"))
 }
 
 val picoliExecution by configurations.creating() {

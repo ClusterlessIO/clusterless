@@ -8,6 +8,7 @@
 
 package clusterless.cls.substrate.aws.managed;
 
+import clusterless.cls.model.deploy.Exportable;
 import clusterless.cls.model.deploy.Placement;
 import clusterless.cls.model.deploy.Resource;
 import clusterless.commons.naming.Label;
@@ -64,11 +65,11 @@ public class ManagedConstruct extends ScopedConstruct implements Managed {
         exportArnRefFor(ref, construct, value, description);
     }
 
-    protected void exportNameRefFor(Resource resource, Construct construct, String value, String description) {
+    protected void exportNameRefFor(Exportable exportable, Construct construct, String value, String description) {
         Ref ref = Ref.ref()
-                .withResourceNs(resource.resourceNs())
-                .withResourceType(resource.resourceType())
-                .withResourceName(resource.name());
+                .withResourceNs(exportable.resourceNs())
+                .withResourceType(exportable.resourceType())
+                .withResourceName(exportable.name());
 
         exportNameRefFor(ref, construct, value, description);
     }

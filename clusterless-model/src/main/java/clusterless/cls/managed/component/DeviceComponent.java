@@ -6,13 +6,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-package clusterless.cls.model.deploy;
-
-import com.fasterxml.jackson.annotation.JsonTypeName;
+package clusterless.cls.managed.component;
 
 /**
  *
  */
-@JsonTypeName
-public abstract class Resource extends Support implements Exportable {
+public interface DeviceComponent extends Component {
 }

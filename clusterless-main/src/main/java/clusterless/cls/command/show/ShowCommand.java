@@ -24,6 +24,7 @@ import java.util.concurrent.Callable;
                 ShowProviders.class,
                 ShowComponents.class,
                 ShowResources.class,
+                ShowDevices.class,
                 ShowBoundaries.class,
                 ShowBarriers.class,
                 ShowArcs.class,

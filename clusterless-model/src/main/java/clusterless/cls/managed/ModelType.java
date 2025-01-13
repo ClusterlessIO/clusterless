@@ -23,6 +23,10 @@ public enum ModelType implements Label.EnumLabel {
             clusterless.cls.model.deploy.Resource.class,
             ResourceComponent.class
     ),
+    Device(
+            clusterless.cls.model.deploy.Device.class,
+            DeviceComponent.class
+    ),
     Activity(
             clusterless.cls.model.deploy.Activity.class,
             ActivityComponent.class

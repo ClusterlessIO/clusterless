@@ -8,11 +8,16 @@
 
 package clusterless.cls.model.deploy;
 
-import com.fasterxml.jackson.annotation.JsonTypeName;
+public interface Exportable {
+    String name();
 
-/**
- *
- */
-@JsonTypeName
-public abstract class Resource extends Support implements Exportable {
+    String type();
+
+    default String resourceNs() {
+        return type().split(":")[1];
+    }
+
+    default String resourceType() {
+        return type().split(":")[2];
+    }
 }

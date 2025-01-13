@@ -43,6 +43,8 @@ public class Deployable extends Model {
     Placement placement = new Placement();
     @JsonProperty("resources")
     List<Resource> resources = new ArrayList<>();
+    @JsonProperty("devices")
+    List<Device> devices = new ArrayList<>();
     @JsonProperty("activities")
     List<Activity> activities = new ArrayList<>();
     @JsonProperty("boundaries")
@@ -73,6 +75,10 @@ public class Deployable extends Model {
 
     public List<Resource> resources() {
         return resources;
+    }
+
+    public List<Device> devices() {
+        return devices;
     }
 
     public List<Activity> activities() {

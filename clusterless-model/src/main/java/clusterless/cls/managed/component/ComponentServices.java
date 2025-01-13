@@ -110,6 +110,7 @@ public class ComponentServices {
     private static List<Extensible> getExtensibleModelsFor(ModelType modelType, Deployable deployableModel) {
         return switch (modelType) {
             case Resource -> new ArrayList<>(deployableModel.resources());
+            case Device -> new ArrayList<>(deployableModel.devices());
             case Activity -> new ArrayList<>(deployableModel.activities());
             case Boundary -> new ArrayList<>(deployableModel.boundaries());
             case Arc -> new ArrayList<>(deployableModel.arcs());

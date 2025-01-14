@@ -32,8 +32,12 @@ tasks.register<Zip>("packageAll") {
 
     into("lib") {
         from(configurations.runtimeClasspath)
-        dirMode = 755
-        fileMode = 755
+        dirPermissions {
+            unix("rwxr-xr-x")
+        }
+        filePermissions {
+            unix("rwxr-xr-x")
+        }
         isReproducibleFileOrder = true
         isPreserveFileTimestamps = false
     }

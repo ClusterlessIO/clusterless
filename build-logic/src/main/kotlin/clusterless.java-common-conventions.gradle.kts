@@ -106,11 +106,12 @@ dependencies {
         implementation("io.heretical:mini-parsers-temporal:2.0.0")
 
         implementation("org.jetbrains:annotations:24.0.0")
-        implementation("info.picocli:picocli:4.7.5")
-        implementation("com.github.jknack:handlebars:4.3.1")
+        implementation("info.picocli:picocli:4.7.6")
+        implementation("com.github.jknack:handlebars:4.4.0")
 //        implementation("com.cronutils:cron-utils:9.2.0")
 
-        val log4j = "2.20.0"
+        // https://mvnrepository.com/artifact/org.apache.logging.log4j
+        val log4j = "2.24.3"
         implementation("org.apache.logging.log4j:log4j-api:$log4j")
         implementation("org.apache.logging.log4j:log4j-core:$log4j")
         implementation("org.apache.logging.log4j:log4j-jul:$log4j")
@@ -118,11 +119,11 @@ dependencies {
         implementation("org.apache.logging.log4j:log4j-to-slf4j:$log4j")
         implementation("org.apache.logging.log4j:log4j-web:$log4j")
 
-        implementationAndTestFixture("com.jayway.jsonpath:json-path:2.8.0")
-        implementationAndTestFixture("com.google.guava:guava:31.1-jre")
+        implementationAndTestFixture("com.jayway.jsonpath:json-path:2.9.0")
+        implementationAndTestFixture("com.google.guava:guava:33.4.0-jre")
 
         // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core
-        val jackson = "2.15.3"
+        val jackson = "2.18.2"
         implementationAndTestFixture("com.fasterxml.jackson.core:jackson-core:$jackson")
         implementationAndTestFixture("com.fasterxml.jackson.core:jackson-databind:$jackson")
         implementationAndTestFixture("com.fasterxml.jackson.datatype:jackson-datatype-joda:$jackson")
@@ -134,7 +135,7 @@ dependencies {
         implementationAndTestFixture("one.util:streamex:0.8.2")
 
         // https://mvnrepository.com/artifact/software.amazon.awssdk
-        val awsSdk = "2.21.33"
+        val awsSdk = "2.29.51"
         implementationAndTestFixture("software.amazon.awssdk:s3:$awsSdk")
         implementationAndTestFixture("software.amazon.awssdk:cloudwatch:$awsSdk")
         implementationAndTestFixture("software.amazon.awssdk:cloudwatchlogs:$awsSdk")
@@ -173,7 +174,7 @@ dependencies {
         testImplementationAndTestFixture("org.mockito:mockito-inline:5.1.1")
 
         // https://mvnrepository.com/artifact/org.testcontainers
-        val testContainers = "1.19.1"
+        val testContainers = "1.20.4"
         testImplementationAndTestFixture("org.testcontainers:testcontainers:$testContainers")
         testImplementationAndTestFixture("org.testcontainers:junit-jupiter:$testContainers")
         testImplementationAndTestFixture("org.testcontainers:localstack:$testContainers")

@@ -19,9 +19,9 @@ import picocli.CommandLine;
 import java.io.*;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Objects;
 
 import static clusterless.cls.printer.Printer.Format.table;
-import static com.github.jknack.handlebars.internal.lang3.Validate.notNull;
 
 /**
  *
@@ -95,7 +95,7 @@ public class Printer {
 
     protected static CharSequence indent(final Object value, final Options options) {
         Integer width = options.param(0, 4);
-        notNull(width, "found 'null', expected 'indent'");
+        Objects.requireNonNull(width, "found 'null', expected 'indent'");
 
         return value.toString()
                 .trim()

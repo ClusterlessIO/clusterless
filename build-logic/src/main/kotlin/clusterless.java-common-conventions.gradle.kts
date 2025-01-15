@@ -111,7 +111,7 @@ dependencies {
 
         val slf4j = "2.0.16"
         implementation("org.slf4j:slf4j-api:$slf4j")
-        implementation("org.slf4j:slf4j-reload4j:$slf4j")
+
         val logback = "1.5.16"
         implementation("ch.qos.logback:logback-classic:$logback")
         implementation("ch.qos.logback:logback-core:$logback")
@@ -122,9 +122,10 @@ dependencies {
         implementation("org.apache.logging.log4j:log4j-api:$log4j")
         implementation("org.apache.logging.log4j:log4j-core:$log4j")
         implementation("org.apache.logging.log4j:log4j-jul:$log4j")
-        implementation("org.apache.logging.log4j:log4j-slf4j-impl:$log4j")
+        implementation("org.apache.logging.log4j:log4j-slf4j2-impl:$log4j")
         implementation("org.apache.logging.log4j:log4j-to-slf4j:$log4j")
         implementation("org.apache.logging.log4j:log4j-web:$log4j")
+        implementation("org.apache.logging.log4j:log4j-layout-template-json:$log4j")
 
         implementationAndTestFixture("com.jayway.jsonpath:json-path:2.9.0")
         implementationAndTestFixture("com.google.guava:guava:33.4.0-jre")
@@ -190,7 +191,6 @@ dependencies {
 
         testImplementationAndTestFixture("ch.qos.logback:logback-classic:$logback")
         testImplementationAndTestFixture("ch.qos.logback:logback-core:$logback")
-        testImplementationAndTestFixture("org.slf4j:slf4j-reload4j:$slf4j")
     }
 }
 

@@ -1,0 +1,29 @@
+<!--
+  ~ Copyright (c) 2023-2025 Chris K Wensel <chris@wensel.net>. All Rights Reserved.
+  ~
+  ~ This Source Code Form is subject to the terms of the Mozilla Public
+  ~ License, v. 2.0. If a copy of the MPL was not distributed with this
+  ~ file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  -->
+
+<Configuration>
+    <Appenders>
+        <Lambda name="Lambda" format="${env:AWS_LAMBDA_LOG_FORMAT:-TEXT}">
+            <LambdaTextFormat>
+                <PatternLayout>
+                    <pattern>%d{yyyy-MM-dd HH:mm:ss} %X{AWSRequestId} %-5p %c{1} - %m%n</pattern>
+                </PatternLayout>
+            </LambdaTextFormat>
+            <LambdaJSONFormat>
+                <JsonTemplateLayout eventTemplateUri="classpath:LambdaLayout.json"/>
+            </LambdaJSONFormat>
+        </Lambda>
+    </Appenders>
+    <Loggers>
+        <Root level="${env:AWS_LAMBDA_LOG_LEVEL:-INFO}">
+            <AppenderRef ref="Lambda"/>
+        </Root>
+        <Logger name="software.amazon.awssdk" level="WARN"/>
+        <Logger name="software.amazon.awssdk.request" level="INFO"/>
+    </Loggers>
+</Configuration>

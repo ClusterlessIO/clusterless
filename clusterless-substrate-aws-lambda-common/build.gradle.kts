@@ -18,7 +18,6 @@ dependencies {
     api(project(":clusterless-substrate-aws-lambda-common-model"))
 
     implementation("com.google.guava:guava")
-//    implementation("com.cronutils:cron-utils")
 
     implementation("com.fasterxml.jackson.core:jackson-core")
     implementation("com.fasterxml.jackson.core:jackson-databind")
@@ -30,14 +29,11 @@ dependencies {
     api("software.amazon.awssdk:eventbridge")
     api("software.amazon.awssdk:glue")
 
+    // https://docs.aws.amazon.com/lambda/latest/dg/java-logging.html#java-logging-log4j2
     api("com.amazonaws:aws-lambda-java-core")
-    api("com.amazonaws:aws-lambda-java-log4j2") {
-        exclude("org.apache.logging.log4j")
-        exclude("log4j:log4j")
-        exclude("org.slf4j:slf4j-log4j12")
-    }
-
-    implementation("org.slf4j:slf4j-reload4j")
+    api("com.amazonaws:aws-lambda-java-log4j2")
+    implementation("org.apache.logging.log4j:log4j-slf4j2-impl")
+    implementation("org.apache.logging.log4j:log4j-layout-template-json")
 
     testFixturesImplementation(project(":clusterless-common"))
     testFixturesImplementation(project(":clusterless-model"))

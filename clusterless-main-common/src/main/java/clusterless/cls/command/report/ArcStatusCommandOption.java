@@ -9,6 +9,7 @@
 package clusterless.cls.command.report;
 
 import clusterless.cls.command.CommonCommandOptions;
+import clusterless.cls.model.state.ArcState;
 import clusterless.cls.util.Moment;
 import picocli.CommandLine;
 
@@ -30,6 +31,12 @@ public class ArcStatusCommandOption extends CommonCommandOptions {
             description = "Filter results by the name of the arc."
     )
     List<String> names = new LinkedList<>();
+
+    @CommandLine.Option(
+            names = {"--state"},
+            description = "Filter results by the state of the arc."
+    )
+    List<ArcState> states = new LinkedList<>();
 
     @CommandLine.Option(names = {"--list"}, description = {"List all arc instances instead of summarizing."})
     boolean list = false;
@@ -97,5 +104,9 @@ public class ArcStatusCommandOption extends CommonCommandOptions {
 
     public List<String> names() {
         return names;
+    }
+
+    public List<ArcState> states() {
+        return states;
     }
 }

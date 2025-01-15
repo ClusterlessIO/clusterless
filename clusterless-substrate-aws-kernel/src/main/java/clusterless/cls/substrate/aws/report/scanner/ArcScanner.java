@@ -17,12 +17,18 @@ import clusterless.cls.substrate.uri.StateURI;
 import clusterless.cls.util.Moment;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Optional;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 public class ArcScanner extends Scanner<ArcRecord, ArcStatusRecord, ArcStatusSummaryRecord, ArcState> {
 
-    public ArcScanner(String profile, ArcRecord arcRecord, Moment earliest, Moment latest) {
+    private final Supplier<Optional<Predicate<ArcState>>> arcStateSupplier;
+
+    public ArcScanner(String profile, ArcRecord arcRecord, Moment earliest, Moment latest, Supplier<Optional<Predicate<ArcState>>> arcStateSupplier) {
         super(profile, arcRecord, earliest, latest);
+        this.arcStateSupplier = arcStateSupplier;
     }
 
     @Override
@@ -36,7 +42,15 @@ public class ArcScanner extends Scanner<ArcRecord, ArcStatusRecord, ArcStatusSum
 
     @NotNull
     protected Stream<ArcStatusRecord> parseStreamIntoUri(Stream<String> resultStream) {
-        return resultStream.map(ArcStateURI::parse)
+        Stream<ArcStateURI> arcStateURIStream = resultStream.map(ArcStateURI::parse);
+
+        Optional<Predicate<ArcState>> supplied = arcStateSupplier.get();
+        if (supplied.isPresent()) {
+            Predicate<ArcState> predicate = supplied.get();
+            arcStateURIStream = arcStateURIStream.filter(uri -> predicate.test(uri.state()));
+        }
+
+        return arcStateURIStream
                 .map(uri -> new ArcStatusRecord(record, uri.lotId(), uri.state()));
     }
 

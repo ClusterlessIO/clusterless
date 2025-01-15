@@ -9,13 +9,16 @@
 package clusterless.cls.substrate.aws.report;
 
 import clusterless.cls.command.report.ArcStatusCommandOption;
+import clusterless.cls.model.state.ArcState;
 import clusterless.cls.substrate.aws.report.reporter.Reporter;
 import clusterless.cls.substrate.aws.report.scanner.ArcScanner;
 import clusterless.cls.util.Moment;
 import picocli.CommandLine;
 
+import java.util.Optional;
 import java.util.concurrent.Callable;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 @CommandLine.Command(
@@ -42,6 +45,16 @@ public class ArcStatus implements Callable<Integer> {
             arcRecordPredicate = arcRecord -> arcStatusCommandOption.names().contains(arcRecord.name());
         }
 
+        Supplier<Optional<Predicate<ArcState>>> arcStateSupplier = () -> {
+            Predicate<ArcState> arcStatePredicate = null;
+
+            if (!arcStatusCommandOption.states().isEmpty()) {
+                arcStatePredicate = arcState -> arcStatusCommandOption.states().contains(arcState);
+            }
+
+            return Optional.ofNullable(arcStatePredicate);
+        };
+
         String profile = arcsCommand.commandOptions.profile();
         Moment earliest = arcStatusCommandOption.earliest();
         Moment latest = arcStatusCommandOption.latest();
@@ -51,7 +64,7 @@ public class ArcStatus implements Callable<Integer> {
 
             try (Stream<ArcRecord> arcStream = arcsCommand.listAllArcs(arcRecordPredicate)) {
                 reporter.report(arcStream
-                        .map(arcRecord -> new ArcScanner(profile, arcRecord, earliest, latest))
+                        .map(arcRecord -> new ArcScanner(profile, arcRecord, earliest, latest, arcStateSupplier))
                         .flatMap(ArcScanner::scan)
                 );
             }
@@ -60,7 +73,7 @@ public class ArcStatus implements Callable<Integer> {
 
             try (Stream<ArcRecord> arcStream = arcsCommand.listAllArcs(arcRecordPredicate)) {
                 reporter.report(arcStream
-                        .map(arcRecord -> new ArcScanner(profile, arcRecord, earliest, latest))
+                        .map(arcRecord -> new ArcScanner(profile, arcRecord, earliest, latest, arcStateSupplier))
                         .map(ArcScanner::summarizeScan)
                 );
             }

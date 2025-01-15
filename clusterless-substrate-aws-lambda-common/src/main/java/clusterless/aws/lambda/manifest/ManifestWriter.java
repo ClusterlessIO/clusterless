@@ -14,8 +14,8 @@ import clusterless.cls.model.manifest.Manifest;
 import clusterless.cls.model.manifest.ManifestState;
 import clusterless.cls.substrate.aws.sdk.S3;
 import clusterless.cls.substrate.uri.ManifestURI;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URI;
 import java.util.Collections;
@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ManifestWriter {
-    private static final Logger LOG = LogManager.getLogger(ManifestWriter.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ManifestWriter.class);
 
     private final S3 s3 = new S3();
     private final ManifestURI sinkManifestPath;
@@ -84,7 +84,11 @@ public class ManifestWriter {
                 ManifestExistsException::new
         );
 
-        LOG.info("writing {} to path: {}", () -> manifest.getClass().getSimpleName(), () -> sinkManifestIdentifier);
+        LOG.atInfo()
+                .setMessage("writing {} to path: {}")
+                .addArgument(() -> manifest.getClass().getSimpleName())
+                .addArgument(() -> sinkManifestIdentifier)
+                .log();
 
         S3.Response response = s3.put(sinkManifestIdentifier, manifest.contentType(), manifest);
 

@@ -8,9 +8,12 @@
 
 package clusterless.cls.startup;
 
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.core.config.Configurator;
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.LoggerContext;
+import org.slf4j.LoggerFactory;
 import picocli.CommandLine;
+
+import static org.slf4j.Logger.ROOT_LOGGER_NAME;
 
 /**
  * https://picocli.info/#_use_case_configure_log_level_with_a_global_option
@@ -23,7 +26,8 @@ public class Verbosity {
     private int level = 0;
 
     public static void setLoggingLevel(Level level) {
-        Configurator.setRootLevel(level);
+        LoggerContext context = (LoggerContext) LoggerFactory.getILoggerFactory();
+        context.getLogger(ROOT_LOGGER_NAME).setLevel(level);
     }
 
     public static void disable() {

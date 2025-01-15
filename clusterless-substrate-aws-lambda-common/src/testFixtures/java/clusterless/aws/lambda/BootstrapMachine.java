@@ -12,14 +12,14 @@ import clusterless.cls.substrate.aws.sdk.EventBus;
 import clusterless.cls.substrate.aws.sdk.Glue;
 import clusterless.cls.substrate.aws.sdk.S3;
 import clusterless.cls.substrate.aws.sdk.SQS;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import software.amazon.awssdk.services.glue.model.Column;
 
 import java.util.List;
 
 public class BootstrapMachine {
-    private static final Logger LOG = LogManager.getLogger(BootstrapMachine.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BootstrapMachine.class);
     S3 s3 = new S3();
     EventBus eventBus = new EventBus();
     SQS sqs = new SQS();

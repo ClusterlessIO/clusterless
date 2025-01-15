@@ -24,9 +24,9 @@ import clusterless.cls.util.URIs;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Streams;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import software.amazon.awssdk.services.glue.model.Table;
 
 import java.net.URI;
@@ -41,7 +41,7 @@ import java.util.stream.Stream;
  *
  */
 public class GlueAddPartitionsArcEventHandler extends ArcEventHandler<GlueAddPartitionsProps> {
-    private static final Logger LOG = LogManager.getLogger(GlueAddPartitionsArcEventHandler.class);
+    private static final Logger LOG = LoggerFactory.getLogger(GlueAddPartitionsArcEventHandler.class);
 
     protected static Glue glue = new Glue();
     protected static final AttemptCounter attemptCounter = new AttemptCounter();

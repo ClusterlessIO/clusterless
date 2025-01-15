@@ -16,15 +16,15 @@ import clusterless.cls.model.manifest.ManifestState;
 import clusterless.cls.substrate.aws.sdk.S3;
 import clusterless.cls.substrate.uri.ManifestURI;
 import clusterless.cls.util.URIs;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URI;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class CreateDataMachine {
-    private static final Logger LOG = LogManager.getLogger(CreateDataMachine.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CreateDataMachine.class);
     S3 s3 = new S3();
     List<String> lots = new LinkedList<>();
 

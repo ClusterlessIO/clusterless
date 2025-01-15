@@ -7,7 +7,7 @@
   ~ file, You can obtain one at http://mozilla.org/MPL/2.0/.
   -->
 
-<Configuration packages="com.amazonaws.services.lambda.runtime.log4j2">
+<Configuration>
     <Appenders>
         <Lambda name="Lambda">
             <PatternLayout>

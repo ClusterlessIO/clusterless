@@ -32,9 +32,8 @@ import clusterless.commons.naming.Label;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.Multimap;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.LoggerFactory;
 import software.constructs.Construct;
 
 import java.io.File;
@@ -47,7 +46,7 @@ import java.util.stream.Collectors;
  *
  */
 public class Lifecycle {
-    private static final Logger LOG = LogManager.getLogger(Lifecycle.class);
+    private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(Lifecycle.class);
 
     ComponentServices componentServices = ComponentServices.INSTANCE;
     StackGroups stackGroups = new StackGroups();

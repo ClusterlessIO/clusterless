@@ -17,9 +17,9 @@ import clusterless.scenario.conductor.runner.ScenarioRunner;
 import clusterless.scenario.model.Scenario;
 import com.netflix.conductor.common.metadata.tasks.Task;
 import com.netflix.conductor.common.run.Workflow;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ConfigurableApplicationContext;
 import picocli.CommandLine;
 
@@ -43,7 +43,7 @@ import java.util.stream.Stream;
         }
 )
 public class Main implements Callable<Integer> {
-    private static final Logger LOG = LogManager.getLogger(Main.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Main.class);
 
     private ConfigurableApplicationContext server;
 

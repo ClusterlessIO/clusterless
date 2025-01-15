@@ -14,9 +14,8 @@ import clusterless.cls.substrate.aws.managed.ManagedComponentContext;
 import clusterless.cls.substrate.aws.util.TagsUtil;
 import clusterless.cls.util.URIs;
 import clusterless.commons.naming.Label;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.LoggerFactory;
 import software.amazon.awscdk.RemovalPolicy;
 import software.amazon.awscdk.services.glue.alpha.*;
 import software.amazon.awscdk.services.s3.IBucket;
@@ -29,7 +28,7 @@ import java.util.Objects;
  *
  */
 public class GlueTableResourceConstruct extends ResourceConstruct<GlueTableResource> {
-    private static final Logger LOG = LogManager.getLogger(GlueTableResourceConstruct.class);
+    private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(GlueTableResourceConstruct.class);
 
     public GlueTableResourceConstruct(@NotNull ManagedComponentContext context, @NotNull GlueTableResource model) {
         super(context, model, Label.of(model.tableName()));

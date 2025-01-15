@@ -15,9 +15,9 @@ import clusterless.scenario.conductor.task.cli.DestroyerBootstrap;
 import com.netflix.conductor.common.metadata.workflow.StartWorkflowRequest;
 import com.netflix.conductor.common.metadata.workflow.WorkflowDef;
 import com.netflix.conductor.common.metadata.workflow.WorkflowTask;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.nio.file.Path;
 import java.util.List;
@@ -25,7 +25,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class BootstrapRunner {
-    private static final Logger LOG = LogManager.getLogger(BootstrapRunner.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BootstrapRunner.class);
     private final Options options;
     private final WorkflowManager workflowManager;
     private final Map<String, String> placement;

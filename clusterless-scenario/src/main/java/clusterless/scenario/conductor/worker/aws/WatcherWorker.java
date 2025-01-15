@@ -14,15 +14,15 @@ import clusterless.scenario.model.WatchedStore;
 import com.netflix.conductor.client.worker.Worker;
 import com.netflix.conductor.common.metadata.tasks.Task;
 import com.netflix.conductor.common.metadata.tasks.TaskResult;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URI;
 import java.util.Map;
 import java.util.concurrent.*;
 
 public abstract class WatcherWorker implements Worker {
-    private static final Logger LOG = LogManager.getLogger(S3WatcherWorker.class);
+    private static final Logger LOG = LoggerFactory.getLogger(WatcherWorker.class);
     protected final Options options;
 
     public WatcherWorker(Options options) {

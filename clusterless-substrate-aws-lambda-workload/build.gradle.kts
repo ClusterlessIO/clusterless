@@ -7,7 +7,7 @@
  */
 
 plugins {
-    id("clusterless.java-library-conventions")
+    id("clusterless.java-lambda-conventions")
 }
 
 dependencies {
@@ -20,10 +20,6 @@ dependencies {
     implementation("software.amazon.awssdk:s3")
     implementation("software.amazon.awssdk:eventbridge")
     implementation("software.amazon.awssdk:glue")
-
-    // https://docs.aws.amazon.com/lambda/latest/dg/java-package.html#java-package-libraries
-    implementation("com.amazonaws:aws-lambda-java-core")
-    implementation("com.amazonaws:aws-lambda-java-log4j2")
 
     testImplementation(testFixtures(project(":clusterless-substrate-aws-lambda-common")))
 }

@@ -16,8 +16,8 @@ import clusterless.cls.util.Env;
 import clusterless.commons.temporal.IntervalBuilder;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.google.common.base.Stopwatch;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import software.amazon.awssdk.services.cloudwatchlogs.CloudWatchLogsClient;
 import software.amazon.awssdk.services.cloudwatchlogs.model.LimitExceededException;
 
@@ -27,7 +27,7 @@ import java.time.Instant;
 import java.time.OffsetDateTime;
 
 public class CloudWatchExportActivityHandler extends EventHandler<AWSEvent, CloudWatchExportActivityObserver> {
-    private static final Logger LOG = LogManager.getLogger(CloudWatchExportActivityHandler.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CloudWatchExportActivityHandler.class);
     protected final CloudWatchExportActivityProps activityProps = Env.fromEnv(
             CloudWatchExportActivityProps.class,
             () -> CloudWatchExportActivityProps.builder()

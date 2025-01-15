@@ -22,9 +22,8 @@ import clusterless.commons.collection.OrderedSafeMaps;
 import clusterless.commons.naming.Label;
 import clusterless.commons.substrate.aws.cdk.construct.LambdaLogGroupConstruct;
 import clusterless.commons.temporal.IntervalUnits;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.LoggerFactory;
 import software.amazon.awscdk.Duration;
 import software.amazon.awscdk.services.events.CronOptions;
 import software.amazon.awscdk.services.events.Rule;
@@ -47,7 +46,7 @@ import java.util.regex.Pattern;
  *
  */
 public class CloudWatchExportActivityConstruct extends ActivityConstruct<CloudWatchExportActivity> {
-    private static final Logger LOG = LogManager.getLogger(CloudWatchExportActivityConstruct.class);
+    private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(CloudWatchExportActivityConstruct.class);
 
     public CloudWatchExportActivityConstruct(@NotNull ManagedComponentContext context, @NotNull CloudWatchExportActivity model) {
         super(context, model);

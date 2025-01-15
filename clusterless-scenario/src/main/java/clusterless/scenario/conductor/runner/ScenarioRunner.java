@@ -24,9 +24,9 @@ import com.netflix.conductor.common.metadata.workflow.StartWorkflowRequest;
 import com.netflix.conductor.common.metadata.workflow.WorkflowDef;
 import com.netflix.conductor.common.metadata.workflow.WorkflowTask;
 import com.netflix.conductor.sdk.workflow.def.tasks.*;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
 import java.util.LinkedList;
@@ -34,7 +34,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ScenarioRunner {
-    private static final Logger LOG = LogManager.getLogger(ScenarioRunner.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ScenarioRunner.class);
     private final Options options;
     private final WorkflowManager workflowManager;
     private final Scenario scenario;

@@ -64,7 +64,7 @@ dependencies {
 
     implementation("javax.validation:validation-api:2.0.1.Final")
 
-    val springBoot = "2.7.3"
+    val springBoot = "2.7.18"
     implementation("org.springframework.boot:spring-boot-starter:$springBoot") {
         exclude("org.springframework.boot", "spring-boot-starter-logging")
     }
@@ -73,11 +73,23 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator:$springBoot")
     implementation("org.springframework.retry:spring-retry:1.3.3") // 2.0.1 is on jdk 17
 
-    implementation("org.apache.logging.log4j:log4j-web")
-
     runtimeOnly("org.glassfish.jaxb:jaxb-runtime:2.3.3")
 
     implementation("com.google.guava:guava")
+}
+
+// the current version of spring boot, used by conductor, hard codes a dependency on
+// org.slf4j.impl.StaticLoggerBinder in the LogbackLoggingSystem class.
+// this was removed in recent slf4j/logback releases so we must pin the scenario project
+// to older versions of slf4j/logback
+configurations.all {
+    resolutionStrategy {
+        force(
+            "org.slf4j:slf4j-api:1.7.28",
+            "ch.qos.logback:logback-classic:1.2.11",
+            "ch.qos.logback:logback-core:1.2.11"
+        )
+    }
 }
 
 application {

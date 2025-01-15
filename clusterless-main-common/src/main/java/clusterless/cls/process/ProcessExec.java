@@ -16,8 +16,7 @@ import io.github.resilience4j.core.StopWatch;
 import io.github.resilience4j.retry.MaxRetriesExceededException;
 import io.github.resilience4j.retry.Retry;
 import io.github.resilience4j.retry.RetryConfig;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.time.Duration;
@@ -25,7 +24,7 @@ import java.util.*;
 import java.util.function.Supplier;
 
 public abstract class ProcessExec {
-    private static final Logger LOG = LogManager.getLogger(ProcessExec.class);
+    private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(ProcessExec.class);
     protected Supplier<Boolean> dryRun = () -> false;
     protected Supplier<Boolean> retry = () -> false;
     protected Supplier<Integer> verbosity = () -> 0;

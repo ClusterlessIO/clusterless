@@ -13,14 +13,14 @@ import clusterless.scenario.conductor.worker.cli.exec.ClusterlessBootstrapExecut
 import com.netflix.conductor.client.worker.Worker;
 import com.netflix.conductor.common.metadata.tasks.Task;
 import com.netflix.conductor.common.metadata.tasks.TaskResult;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 import java.util.Objects;
 
 public abstract class ClusterlessBootstrapWorker implements Worker {
-    private static final Logger LOG = LogManager.getLogger(ClusterlessBootstrapWorker.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ClusterlessBootstrapWorker.class);
     protected final Options options;
     private final boolean destroy;
 

@@ -17,8 +17,8 @@ import clusterless.scenario.model.IngressStore;
 import com.netflix.conductor.client.worker.Worker;
 import com.netflix.conductor.common.metadata.tasks.Task;
 import com.netflix.conductor.common.metadata.tasks.TaskResult;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URI;
 import java.util.Map;
@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class S3IngressWorker implements Worker {
-    private static final Logger LOG = LogManager.getLogger(S3IngressWorker.class);
+    private static final Logger LOG = LoggerFactory.getLogger(S3IngressWorker.class);
 
     protected final Options options;
 

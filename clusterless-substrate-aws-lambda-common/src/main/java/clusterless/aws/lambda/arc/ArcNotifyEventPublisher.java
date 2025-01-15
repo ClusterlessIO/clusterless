@@ -11,8 +11,8 @@ package clusterless.aws.lambda.arc;
 import clusterless.cls.model.deploy.SinkDataset;
 import clusterless.cls.substrate.aws.event.ArcNotifyEvent;
 import clusterless.cls.substrate.aws.sdk.EventBus;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URI;
 import java.util.Map;
@@ -20,7 +20,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class ArcNotifyEventPublisher {
-    private static final Logger LOG = LogManager.getLogger(ArcNotifyEventPublisher.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ArcNotifyEventPublisher.class);
     private final EventBus eventBus = new EventBus();
     private final String eventBusName;
     private final SinkDataset dataset;
@@ -48,11 +48,19 @@ public class ArcNotifyEventPublisher {
                 .build();
 
         if (!dataset.publish()) {
-            LOG.info("skipping publish of {} on {}", () -> notifyEvent.getClass().getSimpleName(), () -> eventBusName);
+            LOG.atInfo()
+                    .setMessage("skipping publish of {} on {}")
+                    .addArgument(() -> notifyEvent.getClass().getSimpleName())
+                    .addArgument(() -> eventBusName)
+                    .log();
             return;
         }
 
-        LOG.info("publishing {} on {}", () -> notifyEvent.getClass().getSimpleName(), () -> eventBusName);
+        LOG.atInfo()
+                .setMessage("publishing {} on {}")
+                .addArgument(() -> notifyEvent.getClass().getSimpleName())
+                .addArgument(() -> eventBusName)
+                .log();
 
         EventBus.Response response = eventBus.put(eventBusName, notifyEvent);
 

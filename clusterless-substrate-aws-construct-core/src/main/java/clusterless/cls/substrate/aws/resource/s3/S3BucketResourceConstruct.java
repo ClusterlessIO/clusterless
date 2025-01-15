@@ -14,9 +14,9 @@ import clusterless.cls.substrate.aws.managed.ManagedComponentContext;
 import clusterless.cls.substrate.aws.resources.Buckets;
 import clusterless.cls.substrate.aws.util.TagsUtil;
 import clusterless.commons.naming.Label;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import software.amazon.awscdk.RemovalPolicy;
 import software.amazon.awscdk.services.s3.BlockPublicAccess;
 import software.amazon.awscdk.services.s3.Bucket;
@@ -28,7 +28,7 @@ import software.constructs.Construct;
  *
  */
 public class S3BucketResourceConstruct extends ResourceConstruct<S3BucketResource> {
-    private static final Logger LOG = LogManager.getLogger(S3BucketResourceConstruct.class);
+    private static final Logger LOG = LoggerFactory.getLogger(S3BucketResourceConstruct.class);
     private final IBucket bucket;
 
     public S3BucketResourceConstruct(@NotNull ManagedComponentContext context, @NotNull S3BucketResource model) {

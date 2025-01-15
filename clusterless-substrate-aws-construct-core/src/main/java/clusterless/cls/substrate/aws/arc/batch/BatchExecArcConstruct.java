@@ -18,9 +18,8 @@ import clusterless.cls.substrate.aws.props.Lookup;
 import clusterless.cls.substrate.aws.resources.Policies;
 import clusterless.commons.naming.Label;
 import clusterless.commons.substrate.aws.cdk.naming.ResourceNames;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.LoggerFactory;
 import software.amazon.awscdk.Duration;
 import software.amazon.awscdk.RemovalPolicy;
 import software.amazon.awscdk.Size;
@@ -42,7 +41,7 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class BatchExecArcConstruct extends ArcConstruct<BatchExecArc> {
-    private static final Logger LOG = LogManager.getLogger(BatchExecArcConstruct.class);
+    private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(BatchExecArcConstruct.class);
     private final Label regionalName;
     private final RetentionDays retentionDays = RetentionDays.ONE_DAY;
     private final RemovalPolicy removalPolicy = RemovalPolicy.DESTROY;

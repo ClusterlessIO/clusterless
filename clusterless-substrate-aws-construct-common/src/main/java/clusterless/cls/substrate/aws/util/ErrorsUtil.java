@@ -8,8 +8,7 @@
 
 package clusterless.cls.substrate.aws.util;
 
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.util.Strings;
+import org.slf4j.Logger;
 import software.constructs.IConstruct;
 
 import java.util.function.Supplier;
@@ -28,7 +27,7 @@ public class ErrorsUtil {
         } catch (software.amazon.jsii.JsiiException error) {
             String errorMessage = error.getMessage();
 
-            if (Strings.isEmpty(expectedType)) {
+            if (expectedType == null || expectedType.isEmpty()) {
                 log.error("failed constructing object with: {}", errorMessage);
             } else {
                 log.error("failed constructing: {}, with: {}", expectedType, errorMessage);

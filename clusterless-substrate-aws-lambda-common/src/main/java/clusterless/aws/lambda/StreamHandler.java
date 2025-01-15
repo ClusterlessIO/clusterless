@@ -14,8 +14,8 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler;
 import com.fasterxml.jackson.databind.ObjectReader;
 import com.google.common.base.Stopwatch;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,7 +27,7 @@ import java.io.OutputStream;
 public abstract class StreamHandler<E> implements RequestStreamHandler {
     private static final byte[] _JsonNull = new byte[]{'n', 'u', 'l', 'l'};
 
-    protected static final Logger LOG = LogManager.getLogger(StreamHandler.class);
+    private static final Logger LOG = LoggerFactory.getLogger(StreamHandler.class);
 
     public static <E> ObjectReader objectReaderFor(Class<E> type) {
         return JSONUtil.OBJECT_MAPPER.readerFor(type);

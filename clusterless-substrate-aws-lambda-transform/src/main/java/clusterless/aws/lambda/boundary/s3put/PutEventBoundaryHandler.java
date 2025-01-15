@@ -18,8 +18,8 @@ import clusterless.cls.substrate.aws.sdk.S3;
 import clusterless.cls.util.Env;
 import clusterless.commons.temporal.IntervalBuilder;
 import com.amazonaws.services.lambda.runtime.Context;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URI;
 import java.time.OffsetDateTime;
@@ -30,7 +30,7 @@ import java.util.List;
  *
  */
 public class PutEventBoundaryHandler extends EventHandler<AWSEvent, PutEventBoundaryObserver> {
-    private static final Logger LOG = LogManager.getLogger(PutEventBoundaryHandler.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PutEventBoundaryHandler.class);
     protected static final S3 s3 = new S3();
 
     protected final S3PutBoundaryProps transformProps = Env.fromEnv(

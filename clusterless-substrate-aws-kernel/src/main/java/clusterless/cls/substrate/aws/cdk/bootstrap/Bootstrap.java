@@ -19,8 +19,7 @@ import clusterless.cls.util.Lists;
 import clusterless.commons.collection.OrderedSafeMaps;
 import clusterless.commons.naming.Stage;
 import clusterless.commons.util.Strings;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
 import picocli.CommandLine;
 import software.amazon.awscdk.AppProps;
 import software.amazon.awscdk.Environment;
@@ -42,7 +41,7 @@ import java.util.concurrent.Callable;
         name = "bootstrap"
 )
 public class Bootstrap extends BaseCDKCommand implements Callable<Integer> {
-    private static final Logger LOG = LogManager.getLogger(Bootstrap.class);
+    private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(Bootstrap.class);
     @CommandLine.Mixin
     BootstrapCommandOptions commandOptions = new BootstrapCommandOptions();
     @CommandLine.Mixin

@@ -89,9 +89,8 @@ fun DependencyConstraintHandlerScope.testImplementationAndTestFixture(constraint
 }
 
 dependencies {
-    implementation("org.apache.logging.log4j:log4j-api")
-    implementation("org.apache.logging.log4j:log4j-core")
-    implementation("org.apache.logging.log4j:log4j-jul")
+    implementation("org.slf4j:slf4j-api")
+
     implementation("org.jetbrains:annotations")
 
     compileOnly("javax.annotation:javax.annotation-api")
@@ -110,6 +109,14 @@ dependencies {
         implementation("com.github.jknack:handlebars:4.4.0")
 //        implementation("com.cronutils:cron-utils:9.2.0")
 
+        val slf4j = "2.0.16"
+        implementation("org.slf4j:slf4j-api:$slf4j")
+        implementation("org.slf4j:slf4j-reload4j:$slf4j")
+        val logback = "1.5.16"
+        implementation("ch.qos.logback:logback-classic:$logback")
+        implementation("ch.qos.logback:logback-core:$logback")
+
+        // only used by lambdas
         // https://mvnrepository.com/artifact/org.apache.logging.log4j
         val log4j = "2.24.3"
         implementation("org.apache.logging.log4j:log4j-api:$log4j")
@@ -181,7 +188,9 @@ dependencies {
         // https://github.com/testcontainers/testcontainers-java/issues/1442#issuecomment-694342883
         testImplementationAndTestFixture("com.amazonaws:aws-java-sdk-s3:1.11.860")
 
-        testImplementationAndTestFixture("org.apache.logging.log4j:log4j-slf4j-impl:$log4j")
+        testImplementationAndTestFixture("ch.qos.logback:logback-classic:$logback")
+        testImplementationAndTestFixture("ch.qos.logback:logback-core:$logback")
+        testImplementationAndTestFixture("org.slf4j:slf4j-reload4j:$slf4j")
     }
 }
 
@@ -203,8 +212,6 @@ testing {
                 implementation("uk.org.webcompere:system-stubs-core")
                 implementation("uk.org.webcompere:system-stubs-jupiter")
                 implementation("org.mockito:mockito-inline")
-
-                implementation("org.apache.logging.log4j:log4j-slf4j-impl") // used by inject-resources
             }
         }
 

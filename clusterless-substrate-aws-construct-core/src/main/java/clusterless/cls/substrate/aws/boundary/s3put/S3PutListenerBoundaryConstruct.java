@@ -10,15 +10,14 @@ package clusterless.cls.substrate.aws.boundary.s3put;
 
 import clusterless.cls.substrate.aws.construct.IngressBoundaryConstruct;
 import clusterless.cls.substrate.aws.managed.ManagedComponentContext;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  */
 public class S3PutListenerBoundaryConstruct extends IngressBoundaryConstruct<S3PutListenerBoundary> {
-    private static final Logger LOG = LogManager.getLogger(S3PutListenerBoundaryConstruct.class);
+    private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(S3PutListenerBoundaryConstruct.class);
 
     public S3PutListenerBoundaryConstruct(@NotNull ManagedComponentContext context, @NotNull S3PutListenerBoundary model) {
         super(context, model);

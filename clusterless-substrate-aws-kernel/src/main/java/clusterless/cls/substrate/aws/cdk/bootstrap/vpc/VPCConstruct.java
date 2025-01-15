@@ -11,9 +11,9 @@ package clusterless.cls.substrate.aws.cdk.bootstrap.vpc;
 import clusterless.cls.substrate.aws.managed.Managed;
 import clusterless.cls.substrate.aws.resources.Vpcs;
 import clusterless.commons.substrate.aws.cdk.naming.ResourceNames;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import software.amazon.awscdk.services.ec2.IpAddresses;
 import software.amazon.awscdk.services.ec2.SubnetConfiguration;
 import software.amazon.awscdk.services.ec2.SubnetType;
@@ -23,7 +23,7 @@ import software.constructs.Construct;
 import java.util.Collections;
 
 public class VPCConstruct extends Construct implements Managed {
-    private static final Logger LOG = LogManager.getLogger(VPCConstruct.class);
+    private static final Logger LOG = LoggerFactory.getLogger(VPCConstruct.class);
 
     private final Vpc vpc;
     private final String vpcName;

@@ -26,8 +26,8 @@ import clusterless.cls.util.Tuple2;
 import clusterless.cls.util.Tuple3;
 import clusterless.cls.util.URIs;
 import com.amazonaws.services.lambda.runtime.Context;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import software.amazon.awssdk.services.s3.S3Client;
 
 import java.net.URI;
@@ -37,7 +37,7 @@ import java.util.*;
  *
  */
 public class S3CopyArcEventHandler extends ArcEventHandler<S3CopyProps> {
-    private static final Logger LOG = LogManager.getLogger(S3CopyArcEventHandler.class);
+    private static final Logger LOG = LoggerFactory.getLogger(S3CopyArcEventHandler.class);
 
     protected static final S3 s3 = new S3();
     protected static final AttemptCounter attemptCounter = new AttemptCounter();

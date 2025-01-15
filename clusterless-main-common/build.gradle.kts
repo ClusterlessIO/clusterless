@@ -14,6 +14,8 @@ dependencies {
     implementation(project(":clusterless-common"))
     implementation(project(":clusterless-model"))
 
+    compileOnly("ch.qos.logback:logback-classic")
+
     implementation("io.heretical:mini-parsers-temporal")
     implementation("info.picocli:picocli")
     implementation("com.github.jknack:handlebars")

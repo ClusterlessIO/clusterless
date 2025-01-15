@@ -12,8 +12,8 @@ import clusterless.cls.json.JSONUtil;
 import clusterless.cls.model.state.ArcState;
 import clusterless.cls.substrate.aws.sdk.S3;
 import clusterless.cls.substrate.uri.ArcStateURI;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URI;
 import java.util.LinkedList;
@@ -23,7 +23,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class ArcStateManager {
-    private static final Logger LOG = LogManager.getLogger(ArcStateManager.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ArcStateManager.class);
     private final S3 s3 = new S3();
 
     final ArcStateURI arcStatePath;

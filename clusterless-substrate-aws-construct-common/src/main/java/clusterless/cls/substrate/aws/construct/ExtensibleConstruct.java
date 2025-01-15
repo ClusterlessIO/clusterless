@@ -13,9 +13,8 @@ import clusterless.cls.substrate.aws.managed.ManagedComponentContext;
 import clusterless.cls.substrate.aws.managed.ManagedConstruct;
 import clusterless.cls.substrate.aws.util.ErrorsUtil;
 import clusterless.commons.naming.Label;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.LoggerFactory;
 import software.amazon.awscdk.services.glue.alpha.ITable;
 import software.amazon.awscdk.services.glue.alpha.Table;
 import software.amazon.awscdk.services.glue.alpha.TableAttributes;
@@ -31,7 +30,7 @@ import java.util.function.Supplier;
  *
  */
 public class ExtensibleConstruct<E extends Extensible> extends ManagedConstruct {
-    private static final Logger LOG = LogManager.getLogger(ExtensibleConstruct.class);
+    private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(ExtensibleConstruct.class);
 
     private final Map<String, IBucket> buckets = new HashMap<>(); // cache the construct to prevent collisions
     private final Map<String, ITable> tables = new HashMap<>(); // cache the construct to prevent collisions

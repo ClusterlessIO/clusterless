@@ -9,8 +9,7 @@
 package clusterless.scenario.conductor.worker.cli.exec;
 
 import clusterless.cls.startup.Startup;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -19,7 +18,7 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public abstract class BaseClusterlessExecutor {
-    private static final Logger LOG = LogManager.getLogger(ClusterlessProjectExecutor.class);
+    private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(ClusterlessProjectExecutor.class);
     private static final Map<String, String> properties = new LinkedHashMap<>();
 
     static {

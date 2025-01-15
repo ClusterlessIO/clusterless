@@ -15,8 +15,8 @@ import clusterless.cls.substrate.aws.event.ArcStateContext;
 import clusterless.cls.substrate.aws.event.ArcWorkloadContext;
 import clusterless.cls.util.Env;
 import com.amazonaws.services.lambda.runtime.Context;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Map;
@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
  * Converts an ArcNotifyEvent into an ArcStateContext for use within the state machine.
  */
 public class ArcStateStartHandler extends StreamResultHandler<ArcNotifyEvent, ArcStateContext> {
-    private static final Logger LOG = LogManager.getLogger(ArcStateStartHandler.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ArcStateStartHandler.class);
     protected static final ArcStateProps arcStateProps = Env.fromEnv(
             ArcStateProps.class,
             () -> ArcStateProps.builder()

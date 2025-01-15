@@ -18,8 +18,8 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.dataformat.toml.TomlMapper;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -37,7 +37,7 @@ import static clusterless.cls.json.JSONUtil.valueToObjectNodeNoNulls;
  *
  */
 public class ConfigManager {
-    private static final Logger LOG = LogManager.getLogger(ConfigManager.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ConfigManager.class);
     public static final Path CURRENT_DIR = Paths.get(".").toAbsolutePath().normalize();
     public static final Path HOME_DIR = Paths.get(System.getProperty("user.home")).toAbsolutePath().normalize();
     public static final Path GLOBAL_CONFIG_DIR = HOME_DIR.resolve(Paths.get(".cls"));

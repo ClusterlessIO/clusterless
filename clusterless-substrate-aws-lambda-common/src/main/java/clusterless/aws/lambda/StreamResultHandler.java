@@ -14,9 +14,9 @@ import com.amazonaws.services.lambda.runtime.RequestStreamHandler;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.databind.ObjectWriter;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.message.ParameterizedMessageFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.helpers.MessageFormatter;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,11 +28,7 @@ import java.util.function.Function;
  *
  */
 public abstract class StreamResultHandler<E, R> implements RequestStreamHandler {
-    private static final Logger LOG = LogManager.getLogger(StreamResultHandler.class);
-    /**
-     * Use the same message format as log4j.
-     */
-    protected static ParameterizedMessageFactory messageFactory = new ParameterizedMessageFactory();
+    private static final Logger LOG = LoggerFactory.getLogger(StreamResultHandler.class);
 
     public static <E> ObjectReader objectReaderFor(Class<E> type) {
         return JSONUtil.OBJECT_MAPPER.readerFor(type);
@@ -98,20 +94,19 @@ public abstract class StreamResultHandler<E, R> implements RequestStreamHandler 
     }
 
     protected void logInfo(String format, Object... values) {
-        // use the log4j message factory so that we don't introduce yet another log format
         LOG.info(format, values);
     }
 
     protected <T> T logErrorAndThrow(BiFunction<String, Throwable, RuntimeException> exceptionFactory, Throwable cause, String format, Object... values) {
         // use the log4j message factory so that we don't introduce yet another log format
-        String message = messageFactory.newMessage(format, values).getFormattedMessage();
+        String message = MessageFormatter.format(format, values).getMessage();
         LOG.error(message, cause);
         throw exceptionFactory.apply(message, cause);
     }
 
     protected <T> T logErrorAndThrow(Function<String, RuntimeException> exceptionFactory, String format, Object... values) {
         // use the log4j message factory so that we don't introduce yet another log format
-        String message = messageFactory.newMessage(format, values).getFormattedMessage();
+        String message = MessageFormatter.format(format, values).getMessage();
         LOG.error(message);
         throw exceptionFactory.apply(message);
     }

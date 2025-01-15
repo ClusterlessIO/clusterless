@@ -24,8 +24,8 @@ import com.amazonaws.services.lambda.runtime.events.models.s3.S3EventNotificatio
 import com.amazonaws.services.lambda.runtime.serialization.PojoSerializer;
 import com.amazonaws.services.lambda.runtime.serialization.events.LambdaEventSerializers;
 import com.google.common.base.Stopwatch;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import software.amazon.awssdk.services.sqs.model.Message;
 import software.amazon.awssdk.services.sqs.model.MessageSystemAttributeName;
 
@@ -42,7 +42,7 @@ import java.util.stream.Collectors;
 import static software.amazon.awssdk.utils.StringUtils.isEmpty;
 
 public class FrequentPutEventBoundaryHandler extends EventHandler<AWSEvent, FrequentPutEventBoundaryObserver> {
-    private static final Logger LOG = LogManager.getLogger(FrequentPutEventBoundaryHandler.class);
+    private static final Logger LOG = LoggerFactory.getLogger(FrequentPutEventBoundaryHandler.class);
     public static final PojoSerializer<S3Event> serializer = LambdaEventSerializers.serializerFor(S3Event.class, S3Event.class.getClassLoader());
     protected final SQS sqs = new SQS();
     protected final FrequentS3PutBoundaryProps transformProps = Env.fromEnv(

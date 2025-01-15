@@ -7,7 +7,7 @@
  */
 
 plugins {
-    id("clusterless.java-library-conventions")
+    id("clusterless.java-lambda-conventions")
 }
 
 dependencies {
@@ -31,7 +31,13 @@ dependencies {
     api("software.amazon.awssdk:glue")
 
     api("com.amazonaws:aws-lambda-java-core")
-    api("com.amazonaws:aws-lambda-java-log4j2")
+    api("com.amazonaws:aws-lambda-java-log4j2") {
+        exclude("org.apache.logging.log4j")
+        exclude("log4j:log4j")
+        exclude("org.slf4j:slf4j-log4j12")
+    }
+
+    implementation("org.slf4j:slf4j-reload4j")
 
     testFixturesImplementation(project(":clusterless-common"))
     testFixturesImplementation(project(":clusterless-model"))

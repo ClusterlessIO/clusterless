@@ -7,7 +7,7 @@
  */
 
 plugins {
-    id("clusterless.java-library-conventions")
+    id("clusterless.java-lambda-conventions")
     id("org.openapi.generator") version "6.6.0"
 }
 
